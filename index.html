@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventário de Computadores - CEE-SC</title>
+    <link rel="icon" type="image/svg+xml" href="logo-simple.svg" />
+    <link rel="icon" type="image/png" href="logo-simple.svg" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- Header -->
+      <div class="row header-bg py-4 mb-4">
+        <div class="col-12 text-center header-content">
+          <div class="logo-container mb-3">
+            <img src="logo.svg" alt="CEE-SC Logo" class="main-logo" />
+          </div>
+          <h1 class="mb-2">Inventário de Computadores</h1>
+          <h4 class="mb-2">
+            <i class="fas fa-university me-2"></i>CONSELHO ESTADUAL DE EDUCAÇÃO
+            - CEE-SC
+          </h4>
+          <p class="mt-2 mb-0 opacity-75">
+            <i class="fas fa-map-marker-alt me-1"></i>Santa Catarina, Brasil
+          </p>
+          <div id="userInfo" class="mt-3">
+            <!-- Informações do usuário serão inseridas aqui -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="quick-actions">
+            <h5 class="mb-3"><i class="fas fa-bolt me-2"></i>Ações Rápidas</h5>
+            <button class="quick-action-btn" onclick="scrollToForm()">
+              <i class="fas fa-plus me-2"></i>Novo Ativo
+            </button>
+            <button class="quick-action-btn" onclick="exportarCSV()">
+              <i class="fas fa-download me-2"></i>Exportar Dados
+            </button>
+            <button class="quick-action-btn" onclick="showBackupModal()">
+              <i class="fas fa-cloud-upload-alt me-2"></i>Backup
+            </button>
+            <button class="quick-action-btn" onclick="showRestoreModal()">
+              <i class="fas fa-cloud-download-alt me-2"></i>Restaurar
+            </button>
+            <button class="quick-action-btn" onclick="showGoogleSheetsModal()">
+              <i class="fab fa-google me-2"></i>Google Sheets
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Section -->
+      <div class="row" id="formSection">
+        <div class="col-12">
+          <div class="form-section fade-in">
+            <h3><i class="fas fa-plus-circle me-2"></i>Cadastrar Novo Ativo</h3>
+            <form id="inventoryForm">
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="idAtivo" class="form-label">
+                    <i class="fas fa-tag me-1"></i>ID Ativo
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="idAtivo"
+                    placeholder="Ex: CEE001"
+                    required
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="patrimonioCIASC" class="form-label">
+                    <i class="fas fa-barcode me-1"></i>Patrimônio CIASC
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="patrimonioCIASC"
+                    placeholder="Ex: PAT001"
+                    required
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="serialNumber" class="form-label">
+                    <i class="fas fa-hashtag me-1"></i>Serial Number
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="serialNumber"
+                    placeholder="Ex: SN123456789"
+                    required
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="hostname" class="form-label">
+                    <i class="fas fa-desktop me-1"></i>Hostname
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="hostname"
+                    placeholder="Ex: CEE-PC001"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="usuarioResponsavel" class="form-label">
+                    <i class="fas fa-user me-1"></i>Usuário Responsável
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="usuarioResponsavel"
+                    placeholder="Nome do usuário"
+                    required
+                  />
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="setorComissao" class="form-label">
+                    <i class="fas fa-building me-1"></i>Setor/Comissão
+                  </label>
+                  <select class="form-select" id="setorComissao" required>
+                    <option value="">Selecione...</option>
+                    <option value="Presidência">Presidência</option>
+                    <option value="Secretaria Executiva">
+                      Secretaria Executiva
+                    </option>
+                    <option value="Comissão de Legislação">
+                      Comissão de Legislação
+                    </option>
+                    <option value="Comissão de Ensino Fundamental">
+                      Comissão de Ensino Fundamental
+                    </option>
+                    <option value="Comissão de Ensino Médio">
+                      Comissão de Ensino Médio
+                    </option>
+                    <option value="Comissão de Educação Superior">
+                      Comissão de Educação Superior
+                    </option>
+                    <option value="TI">TI</option>
+                    <option value="Administrativo">Administrativo</option>
+                  </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="localizacao" class="form-label">
+                    <i class="fas fa-map-marker-alt me-1"></i>Localização
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="localizacao"
+                    placeholder="Ex: Sala 101"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="modelo" class="form-label">
+                    <i class="fas fa-cube me-1"></i>Modelo
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="modelo"
+                    placeholder="Ex: Dell OptiPlex 7090"
+                    required
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="cpu" class="form-label">
+                    <i class="fas fa-microchip me-1"></i>CPU
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cpu"
+                    placeholder="Ex: Intel Core i7-10700"
+                    required
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="ramGB" class="form-label">
+                    <i class="fas fa-memory me-1"></i>RAM (GB)
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="ramGB"
+                    placeholder="Ex: 16"
+                    required
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="armazenamentoGB" class="form-label">
+                    <i class="fas fa-hdd me-1"></i>Armazenamento (GB)
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="armazenamentoGB"
+                    placeholder="Ex: 512"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="tipoArmazenamento" class="form-label">
+                    <i class="fas fa-database me-1"></i>Tipo Armazenamento
+                  </label>
+                  <select class="form-select" id="tipoArmazenamento" required>
+                    <option value="">Selecione...</option>
+                    <option value="SSD">SSD</option>
+                    <option value="HDD">HDD</option>
+                    <option value="SSD + HDD">SSD + HDD</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="sistemaOperacional" class="form-label">
+                    <i class="fab fa-windows me-1"></i>Sistema Operacional
+                  </label>
+                  <select class="form-select" id="sistemaOperacional" required>
+                    <option value="">Selecione...</option>
+                    <option value="Windows 10">Windows 10</option>
+                    <option value="Windows 11">Windows 11</option>
+                    <option value="Windows 7">Windows 7</option>
+                    <option value="Linux">Linux</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="buildSO" class="form-label">
+                    <i class="fas fa-code-branch me-1"></i>Build SO
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="buildSO"
+                    placeholder="Ex: 21H2"
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="officeVersao" class="form-label">
+                    <i class="fas fa-file-word me-1"></i>Office Versão
+                  </label>
+                  <select class="form-select" id="officeVersao">
+                    <option value="">Selecione...</option>
+                    <option value="Office 2016">Office 2016</option>
+                    <option value="Office 2019">Office 2019</option>
+                    <option value="Office 365">Office 365</option>
+                    <option value="LibreOffice">LibreOffice</option>
+                    <option value="Nenhum">Nenhum</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="antivirus" class="form-label">
+                    <i class="fas fa-shield-alt me-1"></i>Antivírus
+                  </label>
+                  <select class="form-select" id="antivirus">
+                    <option value="">Selecione...</option>
+                    <option value="Windows Defender">Windows Defender</option>
+                    <option value="Kaspersky">Kaspersky</option>
+                    <option value="Norton">Norton</option>
+                    <option value="McAfee">McAfee</option>
+                    <option value="Avast">Avast</option>
+                    <option value="Nenhum">Nenhum</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="enderecoIP" class="form-label">
+                    <i class="fas fa-network-wired me-1"></i>Endereço IP
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="enderecoIP"
+                    placeholder="Ex: 192.168.1.100"
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="macAddress" class="form-label">
+                    <i class="fas fa-wifi me-1"></i>MAC Address
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="macAddress"
+                    placeholder="Ex: 00:1B:44:11:3A:B7"
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="dataAquisicao" class="form-label">
+                    <i class="fas fa-calendar-plus me-1"></i>Data Aquisição
+                  </label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="dataAquisicao"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <label for="garantiaFim" class="form-label">
+                    <i class="fas fa-calendar-times me-1"></i>Fim da Garantia
+                  </label>
+                  <input type="date" class="form-control" id="garantiaFim" />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="status" class="form-label">
+                    <i class="fas fa-info-circle me-1"></i>Status
+                  </label>
+                  <select class="form-select" id="status" required>
+                    <option value="">Selecione...</option>
+                    <option value="Ativo">Ativo</option>
+                    <option value="Inativo">Inativo</option>
+                    <option value="Manutenção">Manutenção</option>
+                    <option value="Descartado">Descartado</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="ultimaManutencao" class="form-label">
+                    <i class="fas fa-tools me-1"></i>Última Manutenção
+                  </label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="ultimaManutencao"
+                  />
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="observacoes" class="form-label">
+                    <i class="fas fa-sticky-note me-1"></i>Observações
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="observacoes"
+                    rows="1"
+                    placeholder="Observações adicionais..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-save me-2"></i>Salvar Ativo
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-lg me-3"
+                    onclick="limparFormulario()"
+                  >
+                    <i class="fas fa-eraser me-2"></i>Limpar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-lg"
+                    onclick="gerarQRCode()"
+                  >
+                    <i class="fas fa-qrcode me-2"></i>Gerar QR Code
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Section -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="form-section fade-in">
+            <h5><i class="fas fa-search me-2"></i>Buscar e Filtrar</h5>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="searchInput" class="form-label">
+                  <i class="fas fa-search me-1"></i>Buscar
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="searchInput"
+                  placeholder="Buscar por ID, hostname, usuário..."
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="filterSetor" class="form-label">
+                  <i class="fas fa-filter me-1"></i>Filtrar por Setor
+                </label>
+                <select class="form-select" id="filterSetor">
+                  <option value="">Todos os setores</option>
+                  <option value="Presidência">Presidência</option>
+                  <option value="Secretaria Executiva">
+                    Secretaria Executiva
+                  </option>
+                  <option value="Comissão de Legislação">
+                    Comissão de Legislação
+                  </option>
+                  <option value="Comissão de Ensino Fundamental">
+                    Comissão de Ensino Fundamental
+                  </option>
+                  <option value="Comissão de Ensino Médio">
+                    Comissão de Ensino Médio
+                  </option>
+                  <option value="Comissão de Educação Superior">
+                    Comissão de Educação Superior
+                  </option>
+                  <option value="TI">TI</option>
+                  <option value="Administrativo">Administrativo</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="filterStatus" class="form-label">
+                  <i class="fas fa-filter me-1"></i>Filtrar por Status
+                </label>
+                <select class="form-select" id="filterStatus">
+                  <option value="">Todos os status</option>
+                  <option value="Ativo">Ativo</option>
+                  <option value="Inativo">Inativo</option>
+                  <option value="Manutenção">Manutenção</option>
+                  <option value="Descartado">Descartado</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">&nbsp;</label>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary w-100"
+                  onclick="exportarCSV()"
+                >
+                  <i class="fas fa-download me-1"></i>Exportar CSV
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <div class="row">
+        <div class="col-12">
+          <div class="table-container fade-in">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th><i class="fas fa-tag me-1"></i>ID Ativo</th>
+                    <th><i class="fas fa-barcode me-1"></i>Patrimônio</th>
+                    <th><i class="fas fa-desktop me-1"></i>Hostname</th>
+                    <th><i class="fas fa-user me-1"></i>Usuário</th>
+                    <th><i class="fas fa-building me-1"></i>Setor</th>
+                    <th>
+                      <i class="fas fa-map-marker-alt me-1"></i>Localização
+                    </th>
+                    <th><i class="fas fa-cube me-1"></i>Modelo</th>
+                    <th><i class="fas fa-info-circle me-1"></i>Status</th>
+                    <th><i class="fas fa-tools me-1"></i>Última Manutenção</th>
+                    <th><i class="fas fa-cogs me-1"></i>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                  <!-- Dados serão inseridos via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            <div class="loading-spinner" id="loadingSpinner">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Carregando...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Section -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="form-section fade-in">
+            <h4>
+              <i class="fas fa-chart-bar me-2"></i>Estatísticas do Inventário
+            </h4>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card text-center position-relative">
+                  <div class="card-body">
+                    <i class="fas fa-laptop stats-icon text-primary"></i>
+                    <h5 class="card-title text-primary" id="totalAtivos">0</h5>
+                    <p class="card-text">Total de Ativos</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card text-center position-relative">
+                  <div class="card-body">
+                    <i class="fas fa-check-circle stats-icon text-success"></i>
+                    <h5 class="card-title text-success" id="ativosAtivos">0</h5>
+                    <p class="card-text">Ativos em Uso</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card text-center position-relative">
+                  <div class="card-body">
+                    <i class="fas fa-tools stats-icon text-warning"></i>
+                    <h5 class="card-title text-warning" id="emManutencao">0</h5>
+                    <p class="card-text">Em Manutenção</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card text-center position-relative">
+                  <div class="card-body">
+                    <i
+                      class="fas fa-exclamation-triangle stats-icon text-danger"
+                    ></i>
+                    <h5 class="card-title text-danger" id="garantiaExpirada">
+                      0
+                    </h5>
+                    <p class="card-text">Garantia Expirada</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button
+      class="floating-action-btn"
+      onclick="scrollToForm()"
+      title="Adicionar Novo Ativo"
+    >
+      <img src="logo-simple.svg" alt="CEE-SC" class="floating-logo" />
+    </button>
+
+    <!-- QR Code Modal -->
+    <div class="modal fade" id="qrCodeModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-qrcode me-2"></i>QR Code do Ativo
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <div id="qrCodeContainer"></div>
+            <p class="mt-3">
+              Escaneie este QR code para acessar as informações do ativo
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="downloadQRCode()"
+            >
+              <i class="fas fa-download me-1"></i>Baixar QR Code
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backup Modal -->
+    <div class="modal fade" id="backupModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-cloud-upload-alt me-2"></i>Backup dos Dados
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Clique no botão abaixo para fazer o backup completo dos dados do
+              inventário:
+            </p>
+            <button
+              type="button"
+              class="btn btn-primary w-100"
+              onclick="fazerBackup()"
+            >
+              <i class="fas fa-download me-2"></i>Fazer Backup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Restore Modal -->
+    <div class="modal fade" id="restoreModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-cloud-download-alt me-2"></i>Restaurar Dados
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Atenção: Esta ação irá substituir todos os dados atuais!</p>
+            <input
+              type="file"
+              class="form-control mb-3"
+              id="restoreFile"
+              accept=".json"
+            />
+            <button
+              type="button"
+              class="btn btn-warning w-100"
+              onclick="restaurarDados()"
+            >
+              <i class="fas fa-upload me-2"></i>Restaurar Dados
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Sheets Configuration Modal -->
+    <div class="modal fade" id="googleSheetsModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fab fa-google me-2"></i>Configuração Google Sheets
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-info">
+              <h6><i class="fas fa-info-circle me-2"></i>Como configurar:</h6>
+              <ol class="mb-0">
+                <li>Crie uma nova planilha no Google Sheets</li>
+                <li>Obtenha sua API Key do Google Cloud Console</li>
+                <li>Cole a URL da planilha e a API Key abaixo</li>
+                <li>Clique em "Configurar" para salvar</li>
+              </ol>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="spreadsheetUrl" class="form-label">
+                  <i class="fas fa-link me-1"></i>URL da Planilha Google Sheets
+                </label>
+                <input
+                  type="url"
+                  class="form-control"
+                  id="spreadsheetUrl"
+                  placeholder="https://docs.google.com/spreadsheets/d/..."
+                />
+                <small class="form-text text-muted"
+                  >Cole a URL completa da sua planilha</small
+                >
+              </div>
+              <div class="col-md-6">
+                <label for="apiKey" class="form-label">
+                  <i class="fas fa-key me-1"></i>API Key do Google
+                </label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="apiKey"
+                  placeholder="Sua API Key do Google Cloud Console"
+                />
+                <small class="form-text text-muted"
+                  >API Key para acesso ao Google Sheets</small
+                >
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="configurarGoogleSheets()"
+                  >
+                    <i class="fas fa-cog me-2"></i>Configurar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary ms-2"
+                    onclick="testarConexao()"
+                  >
+                    <i class="fas fa-test-tube me-2"></i>Testar Conexão
+                  </button>
+                </div>
+                <div id="connectionStatus"></div>
+              </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+              <div class="col-md-6">
+                <h6><i class="fas fa-sync me-2"></i>Sincronização</h6>
+                <button
+                  type="button"
+                  class="btn btn-success w-100 mb-2"
+                  onclick="sincronizarParaGoogleSheets()"
+                >
+                  <i class="fas fa-upload me-2"></i>Enviar para Google Sheets
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-info w-100"
+                  onclick="carregarDoGoogleSheets()"
+                >
+                  <i class="fas fa-download me-2"></i>Carregar do Google Sheets
+                </button>
+              </div>
+              <div class="col-md-6">
+                <h6><i class="fas fa-external-link-alt me-2"></i>Acesso</h6>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary w-100 mb-2"
+                  onclick="abrirGoogleSheets()"
+                >
+                  <i class="fab fa-google me-2"></i>Abrir no Google Sheets
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary w-100"
+                  onclick="limparConfiguracao()"
+                >
+                  <i class="fas fa-trash me-2"></i>Limpar Configuração
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="auth-system.js"></script>
+    <script src="google-sheets-integration.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

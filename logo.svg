@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" width="120" height="80">
+  <defs>
+    <!-- Gradiente para o fundo -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a5298;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para o ícone -->
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Sombra suave -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Fundo da logo - retângulo com bordas arredondadas -->
+  <rect x="0" y="0" width="120" height="80" rx="16" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- Ícone de computador minimalista -->
+  <g transform="translate(25, 20)">
+    <!-- Base do laptop -->
+    <rect x="0" y="30" width="40" height="4" rx="2" fill="url(#iconGradient)" opacity="0.9"/>
+    
+    <!-- Tela do laptop -->
+    <rect x="2" y="5" width="36" height="25" rx="3" fill="url(#iconGradient)" opacity="0.95"/>
+    
+    <!-- Tela interna -->
+    <rect x="4" y="7" width="32" height="21" rx="2" fill="#ffffff" opacity="0.95"/>
+    
+    <!-- Interface minimalista da tela -->
+    <rect x="6" y="9" width="28" height="3" rx="1.5" fill="#1e3c72" opacity="0.8"/>
+    <rect x="6" y="13" width="20" height="2" rx="1" fill="#2a5298" opacity="0.6"/>
+    <rect x="6" y="16" width="24" height="2" rx="1" fill="#2a5298" opacity="0.6"/>
+    <rect x="6" y="19" width="16" height="2" rx="1" fill="#2a5298" opacity="0.6"/>
+    
+    <!-- Teclado minimalista -->
+    <rect x="4" y="34" width="32" height="10" rx="2" fill="url(#iconGradient)" opacity="0.85"/>
+    
+    <!-- Teclas em grid simples -->
+    <rect x="6" y="36" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="11" y="36" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="16" y="36" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="21" y="36" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="26" y="36" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    
+    <rect x="6" y="40" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="11" y="40" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="16" y="40" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="21" y="40" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    <rect x="26" y="40" width="4" height="3" rx="0.5" fill="#ffffff" opacity="0.4"/>
+    
+    <!-- Indicador de status - ponto verde -->
+    <circle cx="32" cy="12" r="2.5" fill="#27ae60"/>
+    
+    <!-- Linha de energia - detalhe sutil -->
+    <line x1="35" y1="8" x2="38" y2="8" stroke="url(#iconGradient)" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  </g>
+  
+  <!-- Elementos decorativos sutis -->
+  <circle cx="100" cy="25" r="2" fill="url(#iconGradient)" opacity="0.3"/>
+  <circle cx="105" cy="30" r="1.5" fill="url(#iconGradient)" opacity="0.2"/>
+  <circle cx="95" cy="35" r="1.5" fill="url(#iconGradient)" opacity="0.2"/>
+</svg> 
